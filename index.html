@@ -1,0 +1,279 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <title>Food Ordering System</title>
+</head>
+<body>
+    
+    <div class="sidebar">
+
+        <h1 class="logo">FoodTime</h1>
+
+        <div class="sidebar-menus">
+            <a href="#"><ion-icon name="storefront-outline"></ion-icon>Home</a>
+            <a href="#"><ion-icon name="receipt-outline"></ion-icon>Bills</a>
+            <a href="#"><ion-icon name="wallet-outline"></ion-icon>Wallet</a>
+            <a href="#"><ion-icon name="notifications-outline"></ion-icon>Notification</a>
+            <a href="#"><ion-icon name="chatbubbles-outline"></ion-icon>Contact Us</a>
+            <a href="#"><ion-icon name="settings-outline"></ion-icon>Setting</a>
+        </div>
+
+        <div class="sidebar-logout">
+            <a href="#"><ion-icon name="log-out-outline"></ion-icon>Logout</a>
+        </div>
+    </div>
+
+    <div class="main">
+        <div class="main-navbar">
+            <ion-icon class="menu-toggle" name="menu-outline"></ion-icon>
+            <div class="search">
+                <input type="text" placeholder="What do you want to eat?">
+                <button class="search-btn">Search</button>
+            </div>
+
+            <div class="profile">
+                <a class="cart" href="#" onclick="toggleCartPopup()">
+                    <ion-icon name="cart-outline"></ion-icon>
+                    <span class="cart-count" id="cart-count">0</span>
+                </a>
+                <a class="user" href="#"><ion-icon name="person-outline"></ion-icon></a>
+            </div>
+        </div>
+
+        <!-- shopping cart -->
+        <div id="cart-popup" class="cart-popup">
+            <h4>Shopping Cart</h4>
+            <table id="cart-items">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>#</th>
+                        <th>Price($)</th>
+                        <th>Total($)</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+            <p>Total($) <spam id="cart-total">0.00</spam></p>
+            <button class="checkout" onclick="checkOut()">
+                Checkout
+            </button>
+            <a class="cart-close" onclick="closeCart()"><ion-icon name="close-circle-outline"></ion-icon></a>
+        </div>
+
+        <!-- checkout modal box -->
+        <div id="checkout-modal" class="modal">
+            <div class="modal-content">
+                <span class="close"><ion-icon name="close-circle-outline"></ion-icon></span>
+                <h2>Checkout</h2>
+                <form>
+                    <label for="name">Name:</label><br>
+                    <input type="text" id="name" name="name" placeholder="Please enter your name" required><br><br>
+                    <label for="Card">Table number:</label><br>
+                    <input type="text" id="card" name="card" placeholder="Please enter your table number" required><br><br>
+                    <button type="button" onclick="order()">Order</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- order successfully popup window -->
+        <div id="order-modal" class="modal">
+            <div class="modal-content">
+                <h2>Order Successfully! Please wait for your food</h2>
+            </div>
+        </div>
+
+        <div class="main-highlight">
+            <div class="main-header">
+                <h2 class="main-title">Recommendations</h2>
+                <div class="main-arrow">
+                    <ion-icon class="back" name="chevron-back-circle-outline"></ion-icon>
+                    <ion-icon class="next" name="chevron-forward-circle-outline"></ion-icon>
+                </div>
+            </div>
+
+            <div class="highlight-wrapper">
+                <div class="highlight-card">
+                    <img class="highlight-img" src="images/noodles.jpg">
+                    <div class="highlight-desc">
+                        <h4>Crab Noodles</h4>
+                        <p>$45.80</p>
+                    </div>
+                </div>
+                <div class="highlight-card">
+                    <img class="highlight-img" src="images/fries.jpg">
+                    <div class="highlight-desc">
+                        <h4>Crispy Fries</h4>
+                        <p>$22.40</p>
+                    </div>
+                </div>
+                <div class="highlight-card">
+                    <img class="highlight-img" src="images/rice.jpg">
+                    <div class="highlight-desc">
+                        <h4>Pineapple Rice</h4>
+                        <p>$32.50</p>
+                    </div>
+                </div>
+                <div class="highlight-card">
+                    <img class="highlight-img" src="images/soup.jpg">
+                    <div class="highlight-desc">
+                        <h4>Chowder Soup</h4>
+                        <p>$20.20</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-menus">
+            <div class="main-filter">
+                <div>
+                    <h2 class="main-title">Menu <br>Category</h2>
+                    <div class="main-arrow">
+                        <ion-icon class="back-menus" name="chevron-back-circle-outline"></ion-icon>
+                        <ion-icon class="next-menus" name="chevron-forward-circle-outline"></ion-icon>
+                    </div>
+                </div>
+                <div class="filter-wrapper">
+                    <div class="filter-card">
+                        <div class="filter-icon">
+                            <ion-icon name="restaurant-outline"></ion-icon>
+                        </div>
+                        <p>All Menus</p>
+                    </div>
+                    <div class="filter-card">
+                        <div class="filter-icon">
+                            <ion-icon name="fast-food-outline"></ion-icon>
+                        </div>
+                        <p>Burger</p>
+                    </div>
+                    <div class="filter-card">
+                        <div class="filter-icon">
+                            <ion-icon name="pizza-outline"></ion-icon>
+                        </div>
+                        <p>Pizza</p>
+                    </div>
+                    <div class="filter-card">
+                        <div class="filter-icon">
+                            <ion-icon name="wine-outline"></ion-icon>
+                        </div>
+                        <p>Wine</p>
+                    </div>
+                    <div class="filter-card">
+                        <div class="filter-icon">
+                            <ion-icon name="ice-cream-outline"></ion-icon>
+                        </div>
+                        <p>Ice Cream</p>
+                    </div>
+                    <div class="filter-card">
+                        <div class="filter-icon">
+                            <ion-icon name="cafe-outline"></ion-icon>
+                        </div>
+                        <p>Coffee</p>
+                    </div>
+                    <div class="filter-card">
+                        <div class="filter-icon">
+                            <ion-icon name="fish-outline"></ion-icon>
+                        </div>
+                        <p>Seafood</p>
+                    </div>
+                    <div class="filter-card">
+                        <div class="filter-icon">
+                            <ion-icon name="nutrition-outline"></ion-icon>
+                        </div>
+                        <p>Healthy</p>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="divider">
+
+            <div class="main-detail">
+                <h2 class="main-title">Choose Order</h2>
+                <div class="detail-wrapper">
+                    <div class="detail-card">
+                        <img class="detail-img" src="images/noodles.jpg">
+                        <div class="detail-desc">
+                            <div class="detail-name">
+                                <h4>Crab Noodles</h4>
+                                <p class="detail-sub">Deliciously savory noodles crafted with rich, flavorful crab roe, offering a luxurious taste of the sea. Each bite is a perfect blend of savory and silky textures, making it an unforgettable culinary experience.</p>
+                                <p class="price">$45.80</p>
+                                <button class="add-to-cart-btn" onclick="addToCart('Crab Noodles', 45.80)">Add to cart</button>
+                            </div>
+                            <ion-icon class="detail-favorites" name="bookmark-outline"></ion-icon>
+                        </div>
+                    </div>
+                    <div class="detail-card">
+                        <img class="detail-img" src="images/sausage.jpg">
+                        <div class="detail-desc">
+                            <div class="detail-name">
+                                <h4>German Bratwurst</h4>
+                                <p class="detail-sub">Juicy and flavorful, these traditional German sausages are seasoned with a perfect blend of spices. Grilled to perfection, they offer a delightful snap with every bite and are often enjoyed with mustard and sauerkraut.</p>
+                                <p class="price">$42.00</p>
+                                <button class="add-to-cart-btn" onclick="addToCart('German Bratwurst', 42.00)">Add to cart</button>
+                            </div>
+                            <ion-icon class="detail-favorites" name="bookmark-outline"></ion-icon>
+                        </div>
+                    </div>
+                    <div class="detail-card">
+                        <img class="detail-img" src="images/fries.jpg">
+                        <div class="detail-desc">
+                            <div class="detail-name">
+                                <h4>Crispy Fries</h4>
+                                <p class="detail-sub">Golden and perfectly seasoned, these crispy fries are irresistibly crunchy on the outside and tender on the inside. A classic side dish that pairs well with any meal, offering a satisfying bite every time.</p>
+                                <p class="price">$22.40</p>
+                                <button class="add-to-cart-btn" onclick="addToCart('Crispy Fries', 22.40)">Add to cart</button>
+                            </div>
+                            <ion-icon class="detail-favorites" name="bookmark-outline"></ion-icon>
+                        </div>
+                    </div>
+                    <div class="detail-card">
+                        <img class="detail-img" src="images/cake.jpg">
+                        <div class="detail-desc">
+                            <div class="detail-name">
+                                <h4>Strawberry Cream Cake Roll</h4>
+                                <p class="detail-sub">This delightful dessert features a light and fluffy sponge cake rolled with fresh strawberries and luscious cream. Each slice offers a perfect balance of sweetness and fruity freshness, making it a delightful treat for any occasion.</p>
+                                <p class="price">$18.00</p>
+                                <button class="add-to-cart-btn" onclick="addToCart('Strawberry Cream Cake Roll', 18.00)">Add to cart</button>
+                            </div>
+                            <ion-icon class="detail-favorites" name="bookmark-outline"></ion-icon>
+                        </div>
+                    </div>
+                    <div class="detail-card">
+                        <img class="detail-img" src="images/rice.jpg">
+                        <div class="detail-desc">
+                            <div class="detail-name">
+                                <h4>Pineapple Rice</h4>
+                                <p class="detail-sub">A tropical twist on traditional rice, this dish combines fragrant rice with juicy pineapple chunks and a blend of spices. The sweetness of the pineapple perfectly complements the savory flavors, creating a refreshing and flavorful meal.</p>
+                                <p class="price">$32.50</p>
+                                <button class="add-to-cart-btn" onclick="addToCart('Pineapple Rice', 32.50)">Add to cart</button>
+                            </div>
+                            <ion-icon class="detail-favorites" name="bookmark-outline"></ion-icon>
+                        </div>
+                    </div>
+                    <div class="detail-card">
+                        <img class="detail-img" src="images/soup.jpg">
+                        <div class="detail-desc">
+                            <div class="detail-name">
+                                <h4>Chowder Soup</h4>
+                                <p class="detail-sub">A rich and creamy soup loaded with tender chunks of seafood or vegetables. This hearty dish is perfect for warming up on a chilly day and bursting with comforting flavors.</p>
+                                <p class="price">$20.20</p>
+                                <button class="add-to-cart-btn" onclick="addToCart('Chowder Soup', 20.20)">Add to cart</button>
+                            </div>
+                            <ion-icon class="detail-favorites" name="bookmark-outline"></ion-icon>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<script src="app.js"></script>
+</html>
